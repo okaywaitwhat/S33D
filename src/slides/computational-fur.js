@@ -1,25 +1,32 @@
 const canvasSketch = require('canvas-sketch');
 const random = require('canvas-sketch-util/random');
+const palettes = require('nice-color-palettes');
 const { lerp } = require('canvas-sketch-util/math');
 
 random.setSeed(random.getRandomSeed());
 
+const transp = 'transparent';
 const dark = '#1c1c1c';
 const light= '#eeeeee';
 
 const settings = {
   seed: random.getSeed(),
-  exportPixelRatio: 2,
-  dimensions: [ 1440, 1440 ],
+  dimensions: [ 2048, 2048 ],
   pixelsPerInch: 300,
+  exportPixelRatio: 2,
 };
 
 console.log('Seed', settings.seed);
 
 const sketch = ({ width, height }) => {
+  const colorCount = random.rangeFloor(1, 6);
+  const palette = random.shuffle(random.pick(palettes))
+    .slice(0, colorCount);
+    const colorA = random.pick(palette);
+    const colorB = random.pick(palette);
   const lineCount = 250;
   const lineSegments = 400;
-  const foreground = light;
+  const foreground = colorA;
 
   let lines = [];
   const margin = width * 0.15;
@@ -72,9 +79,10 @@ const sketch = ({ width, height }) => {
     let e = (0.95 * (random.noise3D(1 * nx, 1 * ny, z) * 0.5 + 0.5) +
         0.50 * (random.noise3D(2 * nx, 2 * ny, z) * 0.5 + 0.5) +
         0.25 * (random.noise3D(4 * nx, 4 * ny, z) * 0.5 + 0.5) +
-        0.13 * (random.noise3D(8 * nx, 8 * ny, z) * 0.5 + 0.5) +
-        0.06 * (random.noise3D(16 * nx, 16 * ny, z) * 0.5 + 0.5) +
-        0.03 * (random.noise3D(32 * nx, 32 * ny, z) * 0.5 + 0.5));
+        0.15 * (random.noise3D(6 * nx, 4 * ny, z) * 0.5 + 0.5) +
+        0.10 * (random.noise3D(8 * nx, 8 * ny, z) * 0.5 + 0.5) +
+        0.05 * (random.noise3D(16 * nx, 16 * ny, z) * 0.5 + 0.5) +
+        0.01 * (random.noise3D(32 * nx, 32 * ny, z) * 0.5 + 0.5));
     e /= (1.00 + 0.50 + 0.25 + 0.13 + 0.06 + 0.03);
     e = Math.pow(e, 2);
     e = Math.max(e, 0);
