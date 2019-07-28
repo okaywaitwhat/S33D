@@ -4,10 +4,14 @@ const { lerp } = require('canvas-sketch-util/math');
 
 random.setSeed(random.getRandomSeed());
 
+const dark = '#1c1c1c';
+const light= '#eeeeee';
+
 const settings = {
   seed: random.getSeed(),
   exportPixelRatio: 2,
-  dimensions: [ 1440, 1440 ]
+  dimensions: [ 1440, 1440 ],
+  pixelsPerInch: 300,
 };
 
 console.log('Seed', settings.seed);
@@ -15,7 +19,7 @@ console.log('Seed', settings.seed);
 const sketch = ({ width, height }) => {
   const lineCount = 250;
   const lineSegments = 400;
-  const foreground = 'red';
+  const foreground = light;
 
   let lines = [];
   const margin = width * 0.15;
@@ -45,7 +49,7 @@ const sketch = ({ width, height }) => {
   }
 
   return ({ context, width, height }) => {
-    context.fillStyle = '#181818';
+    context.fillStyle = dark;
     context.globalAlpha = 1;
     context.globalCompositeOperation = 'source-over';
     context.fillRect(0, 0, width, height);
