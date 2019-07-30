@@ -76,7 +76,7 @@ const sketch = ({ width, height }) => {
     // This uses many layers of noise to create a more organic pattern
     nx *= freq;
     ny *= freq;
-    let e = (0.95 * (random.noise3D(1 * nx, 1 * ny, z) * 0.5 + 0.5) +
+    let e = (0.95 * (random.noise3D(1 * nx, 1 * ny, z) * 0.5 + 0.5) + // Try keeping only lines 79 and 85
         0.50 * (random.noise3D(2 * nx, 2 * ny, z) * 0.5 + 0.5) +
         0.25 * (random.noise3D(4 * nx, 4 * ny, z) * 0.5 + 0.5) +
         0.15 * (random.noise3D(6 * nx, 4 * ny, z) * 0.5 + 0.5) +

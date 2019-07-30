@@ -67,7 +67,7 @@ const sketch = () => {
       //context.font = '50px "Futura"';
       context.translate(x, y);
       context.rotate(rotation); // value or radius
-      context.fillText('* .', 0, 0) * 5; // ('_', x, y); 
+      context.fillText('*', 0, 0) * 5; // ('_', x, y); 
       context.restore();
 
     });
