@@ -44,7 +44,7 @@ const sketch = ({ width, height }) => {
       const z0 = noise(x * frequency0, y * frequency0, -1);
       const z1 = noise(x * frequency0, y * frequency0, +1);
 
-      const warp = random.gaussian(20, 40);
+      const warp = random.gaussian(20, 50);
       const fx = x + z0 * warp;
       const fy = y + z1 * warp;
 
@@ -56,7 +56,7 @@ const sketch = ({ width, height }) => {
   }
 
   return ({ context, width, height }) => {
-    context.fillStyle = dark;
+    context.fillStyle = transp;
     context.globalAlpha = 1;
     context.globalCompositeOperation = 'source-over';
     context.fillRect(0, 0, width, height);
