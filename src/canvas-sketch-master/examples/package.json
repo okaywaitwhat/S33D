@@ -1,0 +1,21 @@
+{
+  "name": "examples",
+  "version": "1.0.0",
+  "description": "",
+  "main": "animated-grid.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bezier-easing": "^2.1.0",
+    "camera-project": "^1.0.2",
+    "canvas-sketch": "^0.5.0",
+    "canvas-sketch-util": "^1.8.0",
+    "convex-hull": "^1.0.3",
+    "gl-matrix": "^3.0.0",
+    "perspective-camera": "^2.0.1"
+  }
+}
