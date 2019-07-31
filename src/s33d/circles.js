@@ -10,7 +10,7 @@ const settings = {
   scaleToView: true,
   dimensions: [ 2048, 2048 ],
   pixelsPerInch: 300,
-  exportPixelRatio: 1,
+  exportPixelRatio: 2,
 };
 
 const sketch = ({ width, height }) => {
