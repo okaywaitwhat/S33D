@@ -8,17 +8,12 @@ const palettes = require('nice-color-palettes');
 
 const settings = {
   scaleToView: true,
-  dimensions: [ 2048, 2048 ],
-  pixelsPerInch: 300,
-  exportPixelRatio: 1,
+  dimensions: [ 2048, 2048 ]
 };
 
 const sketch = ({ width, height }) => {
-  const nColors = Random.rangeFloor(1, 2);
-  const palette = Random.shuffle(Random.pick(palettes)).slice(0, nColors);
-  const background = palette.pop();
-  const fillColor = Random.shuffle(Random.pick(palettes)).shift();
-  console.log(fillColor)
+  const palette = Random.shuffle(Random.pick(palettes));
+  const background = palette.shift();
 
   const count = Random.rangeFloor(4, 10);
 
@@ -31,8 +26,7 @@ const sketch = ({ width, height }) => {
 
         const corner = Random.pick([ 0, 0.5, 1, 1.5 ]);
         const arcStart = Math.PI * corner;
-        const portion = Random.pick([ 0.5, 1, 1.5, 2 ]);
-        const arcEnd = arcStart + Math.PI * portion;
+        const arcEnd = arcStart + Math.PI * 1.5;
 
         points.push({
           position: [ u, v ],
@@ -65,7 +59,7 @@ const sketch = ({ width, height }) => {
       const radius = dim / (count - 1) * 0.35;
       context.beginPath();
       context.arc(x, y, radius, arcStart, arcEnd, false);
-      context.fillStyle = fillColor; // or '#2b2b2b';
+      context.fillStyle = 'black';
       context.lineTo(x, y);
       context.fill();
     })
