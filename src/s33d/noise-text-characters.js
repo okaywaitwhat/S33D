@@ -19,7 +19,7 @@ const sketch = () => {
 
   const createGrid = () => {
     const points = [];
-    const count = 40;
+    const count = 19;
     for (let x = 0; x < count; x++) {
       for (let y = 0; y < count; y++) {
       const u = count <= 1 ? 0.5 : x / (count - 1); 
@@ -48,10 +48,10 @@ const sketch = () => {
 
     points.forEach(data => {
       const {
-          color,
-          rotation,
-          position,
-          radius
+        color,
+        rotation,
+        position,
+        radius
       } = data;
 
       const [ u, v ]  = position;
@@ -67,9 +67,8 @@ const sketch = () => {
       //context.font = '50px "Futura"';
       context.translate(x, y);
       context.rotate(rotation); // value or radius
-      context.fillText('*', 0, 0) * 5; // ('_', x, y); 
+      context.fillText(random.pick(['😌', '🍆', '🍌']), 0, 0) * 5; // ('_', x, y); 
       context.restore();
-
     });
   }
 };
