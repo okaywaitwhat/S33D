@@ -40,9 +40,6 @@ canvasSketch(async ({ update }) => {
 
         // Make 'grayscale' by just copying blue channel
         data[oldIndex * 4 + 0] = data[newIndex * 4 + 0];
-        data[oldIndex * 4 + 0.25] = data[newIndex * 4 + 0.25];
-        data[oldIndex * 4 + 0.50] = data[newIndex * 4 + 0.50];
-        data[oldIndex * 4 + 0.75] = data[newIndex * 4 + 0.75];
         data[oldIndex * 4 + 1] = data[newIndex * 4 + 1];
         data[oldIndex * 4 + 2] = data[newIndex * 4 + 2];
         data[oldIndex * 4 + 3] = data[newIndex * 4 + 3];

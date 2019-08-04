@@ -19,7 +19,7 @@ const sketch = () => {
 
   const createGrid = () => {
     const points = [];
-    const count = 19;
+    const count = 80;
     for (let x = 0; x < count; x++) {
       for (let y = 0; y < count; y++) {
       const u = count <= 1 ? 0.5 : x / (count - 1); 
@@ -59,7 +59,7 @@ const sketch = () => {
       const x = lerp(margin, width - margin, u);
       const y = lerp(margin, height - margin, v);
 
-      const size = random.pick([ 5, 10, 25 ]);
+      const size = random.pick([ 5, 8 ]);
 
       context.save();
       context.fillStyle = color;
@@ -67,7 +67,8 @@ const sketch = () => {
       //context.font = '50px "Futura"';
       context.translate(x, y);
       context.rotate(rotation); // value or radius
-      context.fillText(random.pick(['😌', '🍆', '🍌']), 0, 0) * 5; // ('_', x, y); 
+      //context.fillText(random.pick(['😌', '🍆', '🍌']), 0, 0) * 5; // ('_', x, y); 
+      context.fillText(',', 0, 0) * 5;
       context.restore();
     });
   }
