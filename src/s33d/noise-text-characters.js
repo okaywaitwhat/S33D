@@ -9,7 +9,7 @@ const settings = {
     suffix: `seed${random.getSeed}`,
     dimensions: [ 2048, 2048 ],
     pixelsPerInch: 300,
-    exportPixelRatio: 2,
+    exportPixelRatio: 4,
 };
 
 const sketch = () => {
@@ -19,12 +19,12 @@ const sketch = () => {
 
   const createGrid = () => {
     const points = [];
-    const count = 80;
+    const count = 30;
     for (let x = 0; x < count; x++) {
       for (let y = 0; y < count; y++) {
       const u = count <= 1 ? 0.5 : x / (count - 1); 
       const v = count <= 1 ? 0.5 : y / (count - 1);
-      const radius = Math.abs(random.noise2D(u, v)) * 0.01;
+      const radius = Math.abs(random.noise2D(u, v)) * 0.04;
       points.push({
           color: random.pick(palette),
           rotation: random.noise2D(u * v, v),
@@ -40,7 +40,7 @@ const sketch = () => {
   };
 
   const points = createGrid().filter(() => random.value() > 0.5);
-  const margin = 300;
+  const margin = 200;
 
   return ({ context, width, height }) => {
     context.fillStyle = 'transparent';
@@ -68,7 +68,7 @@ const sketch = () => {
       context.translate(x, y);
       context.rotate(rotation); // value or radius
       //context.fillText(random.pick(['😌', '🍆', '🍌']), 0, 0) * 5; // ('_', x, y); 
-      context.fillText(',', 0, 0) * 5;
+      context.fillText('+', 0, 0) * 5;
       context.restore();
     });
   }

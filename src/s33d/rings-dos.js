@@ -9,14 +9,14 @@ random.setSeed(random.getRandomSeed());
 
 const settings = {
   seed: random.getSeed(),
-  dimensions: [ 1000, 1000 ],
+  dimensions: [ 2048, 2048 ],
   pixelsPerInch: 300,
   exportPixelRatio: 2,
 };
 
 const sketch = () => {
   // if colors are defined inside the loop we get wilder results
-  const palette = random.pick(palettes)
+
   // const primaryColor = random.pick(palette)
   // const secondaryColor = random.pick(palette)
   
@@ -29,6 +29,7 @@ const sketch = () => {
     }
     let rings = random.rangeFloor(75, 150)
     while (rings--) {
+      const palette = random.pick(palettes)
       // maybe more chance of changing color/clarity
       // the further away from the center
       const radius = randomRadius()
@@ -37,7 +38,7 @@ const sketch = () => {
       color = random.pick(palette)
       context.beginPath();
       context.strokeStyle = color
-      context.lineWidth = 25
+      context.lineWidth = 100
       context.moveTo(startX, startY)
       for (let i = 0; i < points.length - 1; i++) {
         if (i > 100) {
@@ -55,7 +56,7 @@ const sketch = () => {
 };
 
 function randomRadius () {
-  return 200 + random.value() * 200 * (random.value() > .5 ? -1 : 1);
+  return 400 + random.value() * 400 * (random.value() > .5 ? -1 : 1);
 }
 
 function createBasePoints (center, radius) {

@@ -9,7 +9,7 @@ random.setSeed(random.getRandomSeed());
 
 const settings = {
   seed: random.getSeed(),
-  dimensions: [ 1000, 1000 ],
+  dimensions: [ 2048, 2048 ],
   pixelsPerInch: 300,
   exportPixelRatio: 2,
 };
