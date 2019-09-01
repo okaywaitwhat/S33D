@@ -17,14 +17,14 @@ const sketch = async ({ canvas }) => {
 
   // Generate the image and wait for load to finish before
   // moving forward with rendering.
-  const image = await load('assets/baboon.jpg');
+  const image = await load('assets/mar.jpeg');
 
   // Get the dimensions of the baboon image
   const imageWidth = image.width;
   const imageHeight = image.height;
 
   // How many strips will there be?
-  const amount = 25;
+  const amount = 50;
   // The height of each strip we will create
   const stripHeight = Math.ceil(imageHeight / amount);
 

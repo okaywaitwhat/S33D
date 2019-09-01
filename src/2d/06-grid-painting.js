@@ -4,7 +4,9 @@ const random = require('canvas-sketch-util/random');
 const palettes = require('nice-color-palettes/1000.json');
 
 const settings = {
-  dimensions: [ 2048, 2048 ]
+  dimensions: [ 2048, 2048 ],
+  pixelsPerInch: 300,
+  exportPixelRatio: 2,
 };
 
 const sketch = ({ width, height }) => {
@@ -13,8 +15,9 @@ const sketch = ({ width, height }) => {
   const maxColors = random.rangeFloor(2, 6);
   const fontFamily = '"Andale Mono"';
   const palette = random.shuffle(random.pick(palettes)).slice(0, maxColors);
-  const background = 'hsl(0, 0%, 94%)';
-  const characters = '=.'.split('');
+  //const background = 'hsl(0, 0%, 94%)';
+  const background = 'transparent';
+  const characters = '=.-'.split('');
 
   const createGrid = () => {
     const points = [];

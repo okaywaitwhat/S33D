@@ -21,10 +21,14 @@
     "glsl-dither": "^1.0.1",
     "hex-rgb": "^4.1.0",
     "lerp": "^1.0.3",
+    "load-asset": "^1.2.0",
+    "nice-color-palettes": "^3.0.0",
+    "p5": "^0.9.0",
     "perspective-camera": "^2.0.1",
     "primitive-icosphere": "^1.0.2",
     "primitive-quad": "^2.0.0",
     "regl": "^1.3.11",
-    "three": "^0.107.0"
+    "three": "^0.107.0",
+    "two.js": "^0.7.0-beta.3"
   }
 }

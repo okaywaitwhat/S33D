@@ -3,7 +3,9 @@ const { lerp } = require('canvas-sketch-util/math');
 const random = require('canvas-sketch-util/random');
 
 const settings = {
-  dimensions: [ 2048, 2048 ]
+  dimensions: [ 2048, 2048 ],
+  pixelsPerInch: 300,
+  exportPixelRatio: 2,
 };
 
 const sketch = async () => {
@@ -37,7 +39,7 @@ const sketch = async () => {
 
   // We can use Browser's "FontFace" API to load fonts from JavaScript
   // This will ensure the font is renderable before first drawing to Canvas
-  const fontUrl = 'assets/fonts/SpaceGrotesk-Medium.woff';
+  const fontUrl = 'SpaceGrotesk-Medium.woff';
   const font = new window.FontFace(
     'SpaceGrotesk-Medium',
     `url(${fontUrl})`
