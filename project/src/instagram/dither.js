@@ -1,3 +1,8 @@
+/**
+ * A WebGL example of a dithered noise blob/sphere, using Regl.
+ * @author Matt DesLauriers (@mattdesl)
+ */
+
 const canvasSketch = require('canvas-sketch');
 
 // Import geometry & utilities
@@ -14,11 +19,14 @@ const hexToRGB = hex => {
 };
 
 const settings = {
+  // Output size
   dimensions: [ 2048, 2048 ],
   pixelsPerInch: 300,
   exportPixelRatio: 2,
+
   // Setup render loop
   animate: true,
+  duration: 10,
   fps: 24,
 
   // Ensure we set up a canvas with WebGL context, not 2D
@@ -32,7 +40,7 @@ const settings = {
 
 const sketch = ({ gl, canvasWidth, canvasHeight }) => {
   // Background & foreground colors
-  const color = '#f2bac4';
+  const color = '#ffff';
   const foregroundRGB = hexToRGB(color);
   const backgroundRGBA = [ ...foregroundRGB, 1.0 ];
 
@@ -40,11 +48,11 @@ const sketch = ({ gl, canvasWidth, canvasHeight }) => {
   const regl = createRegl({ gl });
 
   // Create a simple sphere mesh
-  const sphere = createPrimitive();
+  const sphere = createPrimitive(1, { subdivisions: 5 });
 
   // Create a perspective camera
   const camera = createCamera({
-    fov: 40 * Math.PI / 700
+    fov: 45 * Math.PI / 180
   });
 
   // Place our camera
@@ -64,7 +72,7 @@ const sketch = ({ gl, canvasWidth, canvasHeight }) => {
       varying vec3 vPosition;
       varying vec2 screenUV;
 
-      #pragma glslify: dither = require('glsl-dither/2x2');
+      #pragma glslify: dither = require('glsl-dither/4x4');
 
       void main () {
         // Spin light around a bit
@@ -81,7 +89,7 @@ const sketch = ({ gl, canvasWidth, canvasHeight }) => {
         diffuse += pow(vNormal.z, 0.95) * 0.05;
         diffuse = clamp(diffuse, 0.0, 1.0);
 
-        float ditherSize = 256.0;
+        float ditherSize = 300.0;
         diffuse = dither(gl_FragCoord.xy / resolution.xy * ditherSize, diffuse);
         
         gl_FragColor = vec4(color * diffuse, 1.0);
@@ -105,10 +113,7 @@ const sketch = ({ gl, canvasWidth, canvasHeight }) => {
 
         // Contribute noise
         vec3 pos = position;
-        pos += vNormal * pow(noise(vec4(position.xyz * 1.0, time * 0.25)), 0.75) * 1.0;
-        pos += vNormal * pow(noise(vec4(position.xyz * 0.75, time * 0.25)), 0.75) * 0.5;
-        pos += vNormal * pow(noise(vec4(position.xyz * 40.0, time * 0.5)), 0.1) * 0.3;
-        pos *= 0.75;
+        pos *= 1.6;
 
         // Update normal
         vNormal = normalize(pos);

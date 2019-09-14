@@ -6,7 +6,9 @@ const palettes = require('nice-color-palettes');
 
 const settings = {
   animate: true,
-  dimensions: [ 1024, 1280 ],
+  dimensions: [ 1440, 2048 ],
+  pixelsPerInch: 300,
+  exportPixelRatio: 2,
   // Get a WebGL canvas rather than 2D
   context: 'webgl',
   // Turn on MSAA
@@ -20,7 +22,7 @@ const sketch = ({ context, width, height }) => {
   });
 
   // WebGL background color
-  renderer.setClearColor('hsl(0, 0%, 95%)', 1);
+  //renderer.setClearColor('hsl(0, 0%, 95%)', 1);
 
   // Setup a camera, we will update its settings on resize
   const camera = new THREE.OrthographicCamera();
@@ -40,7 +42,7 @@ const sketch = ({ context, width, height }) => {
 
   // Randomize mesh attributes
   const randomizeMesh = (mesh) => {
-    const gridSize = random.rangeFloor(3, 11);
+    const gridSize = random.rangeFloor(3, 10);
     // Choose a random grid point in a 3D volume between -1..1
     const point = new THREE.Vector3(
       grid(random.value(), gridSize),
@@ -83,7 +85,7 @@ const sketch = ({ context, width, height }) => {
   const geometry = new THREE.BoxGeometry(1, 1, 1);
 
   // The # of cubes to create
-  const chunks = 50;
+  const chunks = 60;
 
   // Create each cube and return a THREE.Mesh
   const meshes = Array.from(new Array(chunks)).map(() => {
@@ -111,7 +113,7 @@ const sketch = ({ context, width, height }) => {
 
   // Add a harsh light to the scene
   const light = new THREE.DirectionalLight('white', 1);
-  light.position.set(0, 0, 2);
+  light.position.set(7, 10, 6);
   scene.add(light);
 
   // draw each frame
