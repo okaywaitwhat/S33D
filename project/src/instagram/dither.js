@@ -141,7 +141,6 @@ const sketch = ({ gl, canvasWidth, canvasHeight }) => {
   return ({ viewportWidth, viewportHeight, time, playhead }) => {
     // On each tick, update regl timers and sizes
     regl.poll();
-
     // Clear backbuffer with black
     regl.clear({
       color: backgroundRGBA,

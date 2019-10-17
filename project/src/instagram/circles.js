@@ -20,7 +20,8 @@ const sketch = ({ width, height }) => {
   const fillColor = Random.shuffle(Random.pick(palettes)).shift();
   console.log(fillColor)
 
-  const count = Random.rangeFloor(4, 10);
+  const count = Random.rangeFloor(4, 15);
+  const angle = Random.rangeFloor(45, 180); // adding angle
 
   const createGrid = () => {
     const points = [];
@@ -30,7 +31,7 @@ const sketch = ({ width, height }) => {
         const v = y / (count - 1);
 
         const corner = Random.pick([ 0, 0.5, 1, 1.5 ]);
-        const arcStart = Math.PI * corner;
+        const arcStart = Math.PI * corner - angle;
         const portion = Random.pick([ 0.5, 1, 1.5, 2 ]);
         const arcEnd = arcStart + Math.PI * portion;
 
@@ -64,8 +65,9 @@ const sketch = ({ width, height }) => {
       const dim = Math.min(width, height) - margin * 2;
       const radius = dim / (count - 1) * 0.35;
       context.beginPath();
-      context.arc(x, y, radius, arcStart, arcEnd, false);
-      context.fillStyle = fillColor; // or '#2b2b2b';
+      context.arc(x, y, radius, arcStart, arcEnd, true);
+      //context.fillStyle = fillColor; // or '#2b2b2b';
+      context.fillStyle = Random.shuffle(Random.pick(palettes)).shift();
       context.lineTo(x, y);
       context.fill();
     })

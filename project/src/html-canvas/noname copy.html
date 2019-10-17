@@ -24,13 +24,13 @@ context.shadowBlur = 160
 function render(ms) {
   ms = ms / 4
   context.globalAlpha = 0.77
-  context.fillRect(-400, -400, 1200, 1200) // podria achicarlo
+  context.fillRect(-600, -600, 2200, 2200) // podria achicarlo
   context.globalAlpha = 1
   context.beginPath()
   context.rotate(0.0025)
   //context.rotate(0.0005) //is nice too
   context.shadowColor = `hsl(${ms*.1}, 100%, 100%)`
-  context.shadowBlur = 16
+  context.shadowBlur = 0.01
   const step = Math.PI / ((ms % 200) + 50)
   let angle = 0
   while (angle < Math.PI * 1) {
