@@ -10,6 +10,8 @@
 </style>
 
 <script>
+setupSaveImage()
+
 const context = canvas.getContext('2d', { alpha: false })
 const center = {
   x: canvas.width >> 1,
@@ -56,4 +58,19 @@ function loop(ms) {
 }
 
 requestAnimationFrame(loop)
+
+function setupSaveImage () {
+  const socketUrl = 'ws://localhost:8081'
+  const connection = new WebSocket(socketUrl)
+  connection.onopen = () => {
+    document.addEventListener('keydown', (e) => {
+      const cmdOrCtrlPressed = window.navigator.platform.match('Mac') ? e.metaKey : e.ctrlKey
+      if (cmdOrCtrlPressed && e.keyCode == 83) {
+        e.preventDefault()
+        const dataUrl = canvas.toDataURL('image/png', 1.0)
+        connection.send(dataUrl)
+      }
+    })
+  }
+}
 </script>

@@ -10,6 +10,8 @@
 </style>
 
 <script>
+setupSaveImage()
+
 const context = canvas.getContext('2d', { alpha: false })
 const center = {
   x: canvas.width >> 1,
@@ -20,6 +22,7 @@ context.setTransform(1, 0, 0, 1, center.x, center.y)
 context.lineWidth = 2
 context.strokeStyle = 'rgba(0,0,0,0.8)'
 context.shadowBlur = 16
+context.imageSmoothingEnabled = true
 
 function render(ms) {
   ms = ms / 4
@@ -55,4 +58,20 @@ function loop(ms) {
 }
 
 requestAnimationFrame(loop)
+
+function setupSaveImage () {
+  const socketUrl = 'ws://localhost:8081'
+  const connection = new WebSocket(socketUrl)
+  connection.onopen = () => {
+    document.addEventListener('keydown', (e) => {
+      const cmdOrCtrlPressed = window.navigator.platform.match('Mac') ? e.metaKey : e.ctrlKey
+      if (cmdOrCtrlPressed && e.keyCode == 83) {
+        e.preventDefault()
+        const dataUrl = canvas.toDataURL('image/png', 1.0)
+        connection.send(dataUrl)
+      }
+    })
+  }
+}
+
 </script>
