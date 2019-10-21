@@ -17,20 +17,20 @@ const sketch = async ({ canvas }) => {
 
   // Generate the image and wait for load to finish before
   // moving forward with rendering.
-  const image = await load('assets/molko.jpeg');
+  const image = await load('images/molko.jpeg');
 
   // Get the dimensions of the baboon image
   const imageWidth = image.width;
   const imageHeight = image.height;
 
   // How many strips will there be?
-  const amount = 50;
+  const amount = 20;
   // The height of each strip we will create
-  const stripHeight = Math.ceil(imageHeight / amount);
+  const stripHeight = Math.ceil(imageHeight / amount + 10);
 
   for (let i = 0; i < amount; i++) {
     let pct = i / (amount - 1);
-    let y = imageHeight * (pct - 0.5);
+    let y = imageHeight * (pct - 0.4);
     // Create a rectangle strip that represents a slice of the image
     let sprite = new Two.Rectangle(0, y, imageWidth, stripHeight);
 
