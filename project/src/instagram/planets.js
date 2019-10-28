@@ -66,14 +66,19 @@ const sketch = ({ context }) => {
 
   const moonMesh = new THREE.Mesh(geometry, moonMaterial);
   moonMesh.position.set(1.5, 1, 0)
-  moonMesh.scale.setScalar(0.20)
+  moonMesh.scale.setScalar(0.25)
   moonGroup.add(moonMesh);
-
   scene.add(moonGroup);
 
   const light = new THREE.PointLight("white", 2);
-  light.position.setScalar(2, 2, 2)
-  scene.add(light);
+  light.position.set(2, 2, 0)
+  moonGroup.add(light);
+
+  scene.add(new THREE.GridHelper(5, 50));
+  scene.add(new THREE.PointLightHelper(light, 0.15));
+
+  var axesHelper = new THREE.AxesHelper(5);
+  scene.add(axesHelper);
 
   // draw each frame
   return {
