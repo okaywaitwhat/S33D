@@ -7,7 +7,7 @@ require("three/examples/js/controls/OrbitControls");
 const canvasSketch = require("canvas-sketch");
 
 const settings = {
-  dimensions: [1080, 1080],
+  dimensions: [1080, 2080],
   scaleToView: true,
   pixelsPerInch: 300,
   orientation: "landscape",
@@ -42,21 +42,23 @@ const sketch = ({ context }) => {
   const loader = new THREE.TextureLoader();
   const earth = new loader.load("images/earth.jpg");
   const moon = new loader.load("images/moon.jpg");
+  const sun = new loader.load("images/sun.jpg");
+
+  const bodiesGroup = new THREE.Group();
 
   // Setup a material
-  const material = new THREE.MeshStandardMaterial({
+  const earthMaterial = new THREE.MeshStandardMaterial({
     //color: "red",
-    //wireframe: true
+    //wireframe: true,
     roughness: 1,
     metalness: 0,
     map: earth
   });
 
   // Setup a mesh with geometry + material
-  const mesh = new THREE.Mesh(geometry, material);
-  scene.add(mesh);
-
-  const moonGroup = new THREE.Group();
+  const earthMesh = new THREE.Mesh(geometry, earthMaterial);
+  earthMesh.scale.setScalar(0.42)
+  scene.add(earthMesh);
 
   const moonMaterial = new THREE.MeshBasicMaterial({
     roughness: 1,
@@ -65,19 +67,31 @@ const sketch = ({ context }) => {
   });
 
   const moonMesh = new THREE.Mesh(geometry, moonMaterial);
-  moonMesh.position.set(1.5, 1, 0)
-  moonMesh.scale.setScalar(0.25)
-  moonGroup.add(moonMesh);
-  scene.add(moonGroup);
+  moonMesh.position.set(0.7, 0.4, 0)
+  moonMesh.scale.setScalar(0.07)
+  bodiesGroup.add(moonMesh);
+
+  const sunMaterial = new THREE.MeshBasicMaterial({
+    roughness: 1,
+    metalness: 0,
+    map: sun
+  });
+
+  const sunMesh = new THREE.Mesh(geometry, sunMaterial);
+  sunMesh.position.set(7.4, 0, 0)
+  sunMesh.scale.setScalar(2.22)
+  scene.add(sunMesh);
+  scene.add(bodiesGroup);
 
   const light = new THREE.PointLight("white", 2);
   light.position.set(2, 2, 0)
-  moonGroup.add(light);
+  //bodiesGroup.add(light);
+  sunMesh.add(light);
 
-  scene.add(new THREE.GridHelper(5, 50));
+  scene.add(new THREE.GridHelper(20, 200));
   scene.add(new THREE.PointLightHelper(light, 0.15));
 
-  var axesHelper = new THREE.AxesHelper(5);
+  var axesHelper = new THREE.AxesHelper(20);
   scene.add(axesHelper);
 
   // draw each frame
@@ -91,9 +105,9 @@ const sketch = ({ context }) => {
     },
     // Update & render your scene here
     render({ time }) {
-      mesh.rotation.y = time * 0.15;
+      earthMesh.rotation.y = time * 0.15;
       moonMesh.rotation.y = time * 0.075;
-      moonGroup.rotation.y = time * 0.5;
+      bodiesGroup.rotation.y = time * 0.5;
 
       controls.update();
       renderer.render(scene, camera);
