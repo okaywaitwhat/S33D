@@ -28,12 +28,21 @@ context.lineWidth = 1
 context.strokeStyle = 'white'
 context.imageSmoothingEnabled = true
 
+function drawStatic () {
+  context.beginPath()
+  context.arc(25, 25, 35, 0, 2 * Math.PI, false)
+  context.fillStyle = 'green'
+  context.fill()
+  context.closePath()
+}
+
 let deg = 0
 function render(ms) {
   const len = 1000
   const step = 0.75
   const theta = degreesToRadians(deg)
   context.clearRect(0, 0, canvas.width, canvas.height)
+  drawStatic()
   context.beginPath()
   context.moveTo(origin.x, origin.y)
   context.lineTo(origin.x + len * Math.cos(theta), origin.y + len * Math.sin(theta))
