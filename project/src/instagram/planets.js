@@ -60,7 +60,6 @@ const sketch = ({ context }) => {
   const sunMesh = new THREE.Mesh(geometry, sunMaterial);
   sunMesh.position.set(0, 0, 0)
   sunMesh.scale.setScalar(2.22)
-  scene.add(sunMesh);
 
   // Setup a mars material
   const marsMaterial = new THREE.MeshStandardMaterial({
@@ -75,7 +74,6 @@ const sketch = ({ context }) => {
   const marsMesh = new THREE.Mesh(geometry, marsMaterial);
   marsMesh.scale.setScalar(0.34)
   marsMesh.position.set(0.5, 0, 3.9)
-  scene.add(marsMesh);
   
   // Setup an earth material
   const earthMaterial = new THREE.MeshStandardMaterial({
@@ -89,7 +87,6 @@ const sketch = ({ context }) => {
   // Setup an earth mesh with geometry + material
   const earthMesh = new THREE.Mesh(geometry, earthMaterial);
   earthMesh.scale.setScalar(0.42)
-  scene.add(earthMesh);
 
   // Setup a moon material
   const moonMaterial = new THREE.MeshBasicMaterial({
@@ -100,9 +97,8 @@ const sketch = ({ context }) => {
 
   // Setup a moon mesh with geometry + material
   const moonMesh = new THREE.Mesh(geometry, moonMaterial);
-  moonMesh.position.set(0.7, 0.4, 0)
   moonMesh.scale.setScalar(0.07)
-  scene.add(moon)
+  moonMesh.position.set(0.7, 0.4, 0)
 
   // Setup a light
   const light = new THREE.PointLight("white", 2);
@@ -112,8 +108,9 @@ const sketch = ({ context }) => {
 
   earthAndSateGroup.add(moonMesh, earthMesh);
   bodiesGroup.add(earthAndSateGroup, marsMesh);
-  earthAndSateGroup.position.set(7.4, 0, 0)
+  earthAndSateGroup.position.set(5, 0, 0)
   scene.add(bodiesGroup);
+  scene.add(sunMesh);
 
   scene.add(new THREE.GridHelper(20, 200));
   scene.add(new THREE.PointLightHelper(light, 0.15));
@@ -134,7 +131,7 @@ const sketch = ({ context }) => {
     render({ time }) {
       earthMesh.rotation.y = time * 0.15;
       moonMesh.rotation.y = time * 0.075;
-      bodiesGroup.rotation.y = time * 0.1;
+      //bodiesGroup.rotation.y = time * 0.1;
 
       controls.update();
       renderer.render(scene, camera);
